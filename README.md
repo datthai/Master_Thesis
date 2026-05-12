@@ -8,7 +8,7 @@ Master's Thesis · SGH Warsaw School of Economics · Big Data and Advanced Analy
 
 ## Overview
 
-This repository contains the code, thesis document, and defence presentation for an empirical study comparing local statistical (SARIMA) and global machine learning (Random Forest, LightGBM) demand forecasting models in a periodic-review `(R, S)` inventory system.
+This repository contains the Jupyter notebook for an empirical study comparing local statistical (SARIMA) and global machine learning (Random Forest, LightGBM) demand forecasting models in a periodic-review `(R, S)` inventory system.
 
 The study uses the **Walmart M5 dataset** (FOODS category, store `CA_1`, 1,437 SKU-store series) and a **rolling-origin evaluation** to test four hypotheses about how forecasting model choice affects downstream inventory performance.
 
@@ -72,31 +72,12 @@ A **dual-layer evaluation framework** measures both the accuracy of the forecast
 
 ---
 
-## Repository structure
-
-```
-.
-├── README.md                                       # This file
-├── thesis/
-│   └── THAI_QUOC_DAT_THESIS.docx                   # Final thesis document
-├── presentation/
-│   ├── THAI_QUOC_DAT_DEFENCE_FINAL.pptx            # Defence slides (editable)
-│   └── THAI_QUOC_DAT_DEFENCE_FINAL.pdf             # Defence slides (submission PDF)
-├── notebooks/
-│   ├── 01_forecasting.ipynb                        # SARIMA, RF, LightGBM forecasts
-│   └── 02_inventory_simulation.ipynb               # (R, S) policy, cost/service KPIs
-├── data/
-│   └── README.md                                   # M5 dataset download instructions
-└── requirements.txt                                # Python dependencies
-```
-
----
-
 ## Getting started
 
 ### Prerequisites
 
-- Python 3.9+
+- Python 3.9 or higher
+- Jupyter Notebook or JupyterLab
 - ~8 GB RAM (M5 dataset and rolling-origin loops are memory-intensive)
 - The Walmart M5 dataset from the [M5 Forecasting Accuracy Kaggle competition](https://www.kaggle.com/competitions/m5-forecasting-accuracy)
 
@@ -105,37 +86,28 @@ A **dual-layer evaluation framework** measures both the accuracy of the forecast
 ```bash
 git clone https://github.com/<your-username>/<repo-name>.git
 cd <repo-name>
-python -m venv .venv
-source .venv/bin/activate          # On Windows: .venv\Scripts\activate
-pip install -r requirements.txt
+pip install pandas numpy scipy scikit-learn statsmodels lightgbm matplotlib seaborn tqdm
 ```
 
 ### Data download
 
-Place these four files in `data/raw/`:
+Download the M5 dataset from Kaggle and place these four files in the same folder as the notebook:
 
 - `calendar.csv`
 - `sales_train_evaluation.csv`
 - `sell_prices.csv`
 - `sample_submission.csv`
 
-You can download them from Kaggle:
+You can use the Kaggle CLI:
 
 ```bash
 kaggle competitions download -c m5-forecasting-accuracy
-unzip m5-forecasting-accuracy.zip -d data/raw/
+unzip m5-forecasting-accuracy.zip
 ```
 
 ### Reproduce the results
 
-```bash
-jupyter notebook
-```
-
-Then run notebooks in order:
-
-1. **`01_forecasting.ipynb`** — fits SARIMA, RF, LightGBM under rolling-origin validation, saves forecast outputs and WRMSSE.
-2. **`02_inventory_simulation.ipynb`** — runs the `(R, S)` simulation, computes holding cost and fill rate, generates the z-sweep for the Pareto frontier.
+Open `Thai_Thesis Notebook.ipynb` in Jupyter and run all cells.
 
 All results in the thesis and presentation can be reproduced with:
 
@@ -211,7 +183,7 @@ The full bibliography (40+ entries) is in the thesis. The five most cited works:
 
 ## License
 
-This work is submitted as a Master's thesis at SGH Warsaw School of Economics. The code is released under the **MIT License** for academic and non-commercial use. The thesis text and presentation remain the intellectual property of the author and SGH.
+This work is submitted as a Master's thesis at SGH Warsaw School of Economics. The code is released for academic and non-commercial use. The thesis text and presentation remain the intellectual property of the author and SGH.
 
 The Walmart M5 dataset is distributed by Kaggle under the terms of the [M5 competition](https://www.kaggle.com/competitions/m5-forecasting-accuracy/rules).
 
